@@ -27,10 +27,10 @@
  *         Arduino PIN 9   ===================  Active buzzer positive pole
  */
 
-int fire_pin = A5 ;     // define analog 5 pin for fire-sensor pin
-int buzzer = 9 ;        // buzzer dirver pin
+int fire_pin = A5;     // define analog 5 pin for fire-sensor pin
+int buzzer = 9;        // buzzer dirver pin
 int val = 0;
-int count = 0 ;
+int count = 0;
 void setup()
 {
     pinMode(buzzer,OUTPUT);        // buzzer pin is output
@@ -42,21 +42,18 @@ void loop()
 {
     val = analogRead(fire_pin);    // get fire-sensor analog value
     Serial.println(val);
-    if( val < 600 )                // get value > 600 counet add
+    if ( val < 600 )                // get value > 600 counet add
     {
-        count++ ;
+        count++;
     }
-    else
-    {
-       count = 0 ;
+    else {
+       count = 0;
     }
     if( count >= 5 )              // count > 5 ensure infrared radiation found and give an alarm
     {
-        digitalWrite(buzzer , HIGH );
-    }
-    else
-    {
-        digitalWrite(buzzer , LOW );   // disable an alarm
+        digitalWrite(buzzer, HIGH);
+    } else {
+        digitalWrite(buzzer, LOW);   // disable an alarm
     }
     delay(500);
 }

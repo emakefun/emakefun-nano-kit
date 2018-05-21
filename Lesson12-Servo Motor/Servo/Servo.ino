@@ -21,28 +21,33 @@
  * or FITNESS FOR A PARTICULAR PURPOSE.
  *
  *
- * [Title]    keypad control led light
- * [diagram]
- *         Arduino PIN 11  ===================  led control gpio
- *         Arduino PIN 7   ===================  keypad pin
+ * [Title]
+ * [Diagram]
+
  */
-int led_out = 11 ;  //GPIO 11  LED pin
-int keypad_pin = 7; //GPIO 7 key pin
-int value;
+int readPin = A0;
+int servopin = 7;
+
+void servopulse(int angle)
+{
+    int pulsewidth=(angle*11)+500;
+    digitalWrite(servopin,HIGH);
+    delayMicroseconds(pulsewidth);
+    digitalWrite(servopin,LOW);
+    delayMicroseconds(20000-pulsewidth);
+}
+
 void setup()
 {
-  pinMode(led_out,OUTPUT);    		// init led pin output
-  pinMode(keypad_pin,INPUT);          // init key pin input
+    pinMode(servopin,OUTPUT);
 }
+
 void loop()
 {
-  value = digitalRead(keypad_pin);    // read key pad pin vaule
-  if( value == LOW )
+    int readValue = analogRead(readPin);
+    int angle = readValue / 4;
+    for(int i=0;i<50;i++)
     {
-      digitalWrite(led_out,LOW);      // if key value is down  turn off LED
+        servopulse(angle);
     }
-    else
-      {
-        digitalWrite(led_out,HIGH);     // if key value is down  turn on LED
-      }
 }

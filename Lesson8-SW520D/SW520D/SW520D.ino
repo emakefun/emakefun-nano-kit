@@ -21,28 +21,30 @@
  * or FITNESS FOR A PARTICULAR PURPOSE.
  *
  *
- * [Title]    keypad control led light
- * [diagram]
- *         Arduino PIN 11  ===================  led control gpio
- *         Arduino PIN 7   ===================  keypad pin
+ * [Title]      SW520D Ball Switch
+ * [Diagram]
+ *         Arduino PIN A5   ===================  SW520D PIN 1
+ *         Arduino PIN GND  ===================  SW520D PIN 2
+ *         Arduino PIN A5   ===================  10kΩresistor PIN 1
+ *         Arduino PIN 5V   ===================  10kΩresistor PIN 2
+ *         Arduino PIN 13   ===================  LED PIN +
+ *         Arduino PIN GND  ===================  LED PIN -
  */
-int led_out = 11 ;  //GPIO 11  LED pin
-int keypad_pin = 7; //GPIO 7 key pin
-int value;
-void setup()
-{
-  pinMode(led_out,OUTPUT);    		// init led pin output
-  pinMode(keypad_pin,INPUT);          // init key pin input
-}
-void loop()
-{
-  value = digitalRead(keypad_pin);    // read key pad pin vaule
-  if( value == LOW )
-    {
-      digitalWrite(led_out,LOW);      // if key value is down  turn off LED
-    }
-    else
-      {
-        digitalWrite(led_out,HIGH);     // if key value is down  turn on LED
-      }
+int Led=13;
+int buttonpin=A5;
+int val=0;
+void setup() 
+{  
+  pinMode(Led,OUTPUT);
+  pinMode(buttonpin,INPUT);
+}  
+void loop() 
+{  
+    val=analogRead(buttonpin);
+    if (val>512) {  
+        digitalWrite(Led,HIGH); 
+    } 
+    else {  
+        digitalWrite(Led,LOW); 
+    } 
 }

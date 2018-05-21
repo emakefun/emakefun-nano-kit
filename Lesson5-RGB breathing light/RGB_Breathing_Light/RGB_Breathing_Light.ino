@@ -50,23 +50,23 @@ void setColor(int red,int green,int blue)
 void loop()
 {
     int i;
-    for(i=0;i<256;i++)
+    for (i=0; i<256; i++)
     {
-        setColor(i,0,0);
+        setColor(i, 0, 0);
         delay(4);
     }
     delay(500);           //turn the RGB LED red smoth
 
-    for(i=0;i<256;i++)
+    for (i=0; i < 256; i++)
     {
-        setColor(0,i,0);
+        setColor(0, i, 0);
         delay(4);
     }
     delay(500);           //turn the RGB LED green smoth
 
-    for(i=0;i<256;i++)
+    for (i=0; i < 256; i++)
     {
-        setColor(0,0,i);
+        setColor(0, 0, i);
         delay(4);
     }
     delay(100);           //turn the RGB LED blue smoth
