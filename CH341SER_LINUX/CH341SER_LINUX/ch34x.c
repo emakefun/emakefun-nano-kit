@@ -30,6 +30,7 @@
 //#include <linux/uaccess.h>
 #include <linux/usb.h>
 #include <linux/usb/serial.h>
+#include <linux/sched/signal.h>
 
 #define DRIVER_DESC		"WCH CH34x USB to serial adaptor driver"
 #define DRIVER_AUTHOR	"<tech@wch.cn>"
@@ -588,7 +589,7 @@ static void ch34x_close( struct usb_serial_port *port,
 	unsigned int c_cflag;
 	int bps;
 	long timeout;
-	wait_queue_t wait;
+	wait_queue_entry_t wait;
 
 #if(LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0))
 	dbg_ch34x("%s - port:%d", __func__, port->number);
